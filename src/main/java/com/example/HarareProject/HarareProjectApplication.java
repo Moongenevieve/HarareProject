@@ -11,3 +11,19 @@ public class HarareProjectApplication {
 	}
 
 }
+
+/*
+* spring.application.name=HarareProject
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/HarareDB
+spring.datasource.username=root
+spring.datasource.password=Absam401$
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect
+server.port=8080
+spring.security.user.password=user22
+spring.security.user.name=user
+
+*
+* */

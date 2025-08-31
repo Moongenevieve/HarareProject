@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,15 +42,11 @@ public class SecurityConfig {
                                 auth.requestMatchers("/authenticate").permitAll()
                                         .requestMatchers("/api/users/register").permitAll()
                                         .requestMatchers(HttpMethod.GET).permitAll()
-                                        .requestMatchers(HttpMethod.POST).permitAll()
-                                        .requestMatchers(HttpMethod.DELETE).permitAll()
-                                        .requestMatchers(HttpMethod.PUT).permitAll()
-                                        //.requestMatchers("/api/skill").permitAll()
-                                        //.requestMatchers("/ticket/").hasRole("ADMIN")
-                                        //.requestMatchers("/ticket/").hasRole(Role.ADMIN.name())
-                                        // .requestMatchers(HttpMethod.GET,"/ticket/**").hasAuthority(Permissions.TIK_READ.name())
-                                        // .requestMatchers(HttpMethod.POST,"/ticket/**").hasAuthority(Permissions.TIK_WRITE.name())
-                                        .anyRequest().authenticated());
+                                        //.requestMatchers(HttpMethod.POST).permitAll()
+                                        //.requestMatchers(HttpMethod.DELETE).permitAll()
+                                        //.requestMatchers(HttpMethod.PUT).permitAll()
+                                        .anyRequest().authenticated())
+                                        .oauth2Login(Customizer.withDefaults());
         //.httpBasic(withDefaults());
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
