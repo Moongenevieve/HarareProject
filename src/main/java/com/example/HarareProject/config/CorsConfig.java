@@ -1,6 +1,5 @@
 package com.example.HarareProject.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,13 +13,16 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("*")
-                        .allowedOriginPatterns("https://harareproject-production.up.railway.app*"
-                        ,"http://harareproject-production.up.railway.app*")
-                        .allowedMethods("GET","POST","PUT","DELETE")
+                registry.addMapping("/**") // ✅ must be /**, not *
+                        .allowedOriginPatterns(
+                                "https://harareproject-production.up.railway.app",
+                                "http://harareproject-production.up.railway.app",
+                                "http://localhost:*"
+                        )
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
                         .allowCredentials(true);
             }
         };
-
     }
 }
