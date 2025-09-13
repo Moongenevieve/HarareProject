@@ -30,6 +30,7 @@ public class AuthController {
         }
         catch(Exception e) {
             throw e;
+
             // System.out.println(e.getMessage());
         }
     }

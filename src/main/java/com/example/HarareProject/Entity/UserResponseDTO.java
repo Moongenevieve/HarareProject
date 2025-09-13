@@ -3,12 +3,14 @@ package com.example.HarareProject.Entity;
 public class UserResponseDTO {
     private Long id;
     private String username;
+    private String email;
     private String role;
 
 
-    public UserResponseDTO(Long id, String username, String role) {
+    public UserResponseDTO(Long id, String username, String email, String role) {
         this.id = id;
         this.username = username;
+        this.email = email;
         this.role = role;
     }
 
@@ -34,5 +36,13 @@ public class UserResponseDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

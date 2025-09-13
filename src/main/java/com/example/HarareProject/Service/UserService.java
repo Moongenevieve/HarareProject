@@ -28,15 +28,21 @@ public class UserService {
             throw new RuntimeException("User already exists please");
         }
 
+        //check if email already present
+        if(usersDetailsRepo.findByEmail(registerUserRequest.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists please");
+        }
+
         //encode the password
         Users user = new Users();
         user.setUsername(registerUserRequest.getUsername());
+        user.setEmail(registerUserRequest.getEmail());
         user.setRole(registerUserRequest.getRole());
         user.setPassword(passwordEncoder.encode(registerUserRequest.getPassword()));
 
         //save users
         Users savedUser = usersDetailsRepo.save(user);
-        return new UserResponseDTO(savedUser.getId(),savedUser.getUsername(), savedUser.getRole().name());
+        return new UserResponseDTO(savedUser.getId(),savedUser.getUsername(),savedUser.getEmail(), savedUser.getRole().name());
 
     }
 }

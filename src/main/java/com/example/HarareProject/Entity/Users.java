@@ -19,6 +19,7 @@ public class Users implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -60,6 +61,14 @@ public class Users implements UserDetails {
         return authorities;
     }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     private Set<SimpleGrantedAuthority> convertRoleRoPermissions() {
         return role.getPermissions().stream().

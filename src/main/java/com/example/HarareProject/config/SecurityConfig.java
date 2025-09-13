@@ -4,6 +4,7 @@ import com.example.HarareProject.Entity.Permissions;
 import com.example.HarareProject.Entity.Role;
 import com.example.HarareProject.filters.JWTAuthFilter;
 import com.example.HarareProject.Service.CustomUserDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,7 +52,24 @@ public class SecurityConfig {
                                         //.requestMatchers(HttpMethod.DELETE).permitAll()
                                         //.requestMatchers(HttpMethod.PUT).permitAll()
                                         .anyRequest().authenticated())
-                                        .oauth2Login(Customizer.withDefaults());
+                                        .oauth2Login(Customizer.withDefaults())
+                                           // ✅ Handle API calls differently
+                                        .exceptionHandling(ex -> ex
+                                        .authenticationEntryPoint((request,
+                                                                   response,
+                                                                   authException) -> {
+                                        String uri = request.getRequestURI();
+                                    if (uri.startsWith("/api/") || uri.startsWith("/authenticate")) {
+                                        // API request → return JSON
+                                response.setContentType("application/json");
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                response.getWriter().write("{\"error\": \"Unauthorized or invalid token\"}");
+                            } else {
+                                // Browser request → default behavior (redirect to login)
+                                response.sendRedirect("/login");
+                            }
+                        })
+                );
         //.httpBasic(withDefaults());
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
