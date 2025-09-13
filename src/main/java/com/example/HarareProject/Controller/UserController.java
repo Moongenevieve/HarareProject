@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "https://harareproject-production.up.railway.app")
 @RequestMapping("/api/users")
 public class UserController {
 
