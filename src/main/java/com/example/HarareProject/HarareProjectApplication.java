@@ -13,7 +13,6 @@ public class HarareProjectApplication {
 }
 
 /*
-*
 spring.application.name=HarareProject
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/HarareDB
@@ -26,5 +25,4 @@ server.port=8080
 spring.security.user.password=user22
 spring.security.user.name=user
 
-*
 * */
