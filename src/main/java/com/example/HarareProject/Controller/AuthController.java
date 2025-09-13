@@ -8,7 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://harareproject-production.up.railway.app")
+@CrossOrigin
+
 public class AuthController {
 
     @Autowired
